@@ -10,7 +10,7 @@ module.exports = {
   /**
    * ソースの存在しているディレクトリ
    */
-  srcDir: 'app',
+  // srcDir: 'app',
 
   /**
    * Vue Routerの設定を上書きできる
@@ -72,7 +72,14 @@ module.exports = {
       /**
        * webpackの出力先
        */
-      config.output.publicPath = './_nuxt/'
+      config.output.publicPath = './_nuxt/',
+      config.target = 'electron-renderer'
     }
-  }
+  },
+  /**
+   * https://ja.nuxtjs.org/api/configuration-dev
+   * nuxt build、nuxt start、nuxt generate 以外の場合はTrueになる
+   */
+  dev: process.env.NODE_ENV === 'development',
+
 }
