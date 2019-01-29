@@ -69,6 +69,9 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
+      babel: {
+        plugins: ['transform-decorators-legacy', 'transform-class-properties']
+      }
       /**
        * webpackの出力先
        */
