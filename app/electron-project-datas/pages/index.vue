@@ -1,34 +1,59 @@
 <template lang="pug">
   .root
-    h1 sample
-    button(@click="onClick") test
+    .side-bar
+      .content(v-show="$data.isShowSidebar")
+        SideBar
+        h1 test
+    .content
+      h1 sample
+      button(@click="onShowSidebar") open
+      button(@click="onCloseSidebar") close
 </template>
 
 <script>
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import { Component, Prop, Inject } from "vue-property-decorator";
 // Components
 // import Input from '../components/Input.vue';
+import SideBar from "./components/SideBar";
+
 @Component({
-  // components: {Input}
+  components: {
+    SideBar
+  }
 })
 export default class Index extends Vue {
-  count = 3;
-  sample = "test";
-  countUp() {
-    this.count++;
-  }
-  input(value) {
-    console.log(value);
-  }
+  isShowSidebar = false;
+
   created() {
-    console.log(this);
-    this.$eventEmitter.on("sample", value => {
-      console.log(value);
-    });
+    this.$eventEmitter.on("sidebar", this.sidebarEmit);
   }
-  onClick() {
-    this.$eventEmitter.emit("sample", { a: "b" });
+  beforeDestroy() {
+    this.$eventEmitter.on("sidebar", this.sidebarEmit);
   }
+  onShowSidebar() {
+    this.$eventEmitter.emit("sidebar", { open: true });
+  }
+  onCloseSidebar() {
+    this.$eventEmitter.emit("sidebar", { open: false });
+  }
+
+  sidebarEmit (value) {
+    this.$data.isShowSidebar = value.open;
+  }
+
 }
 </script>
+
+<style scoped>
+.root {
+  background-color: #333;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.side-bar {
+  width: 150px;
+}
+</style>
