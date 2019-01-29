@@ -1,10 +1,6 @@
-<template>
-  <div class="hello">
-    <p>{{ count }}</p>
-    <button @click='countUp'>count up</button>
-    <Input v-model="$data.sample" />
-    {{ $data.sample }}
-  </div>
+<template lang="pug">
+  .root
+    h1 sample
 </template>
 
 <script>

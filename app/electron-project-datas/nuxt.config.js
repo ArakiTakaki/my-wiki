@@ -11,7 +11,9 @@ module.exports = {
    * ソースの存在しているディレクトリ
    */
   // srcDir: 'app',
-
+  css: [
+    'reset.css'
+  ],
   /**
    * Vue Routerの設定を上書きできる
    */
@@ -52,7 +54,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [ '~/plugins/VeeValidate' ],
+  plugins: [ '~/plugins/VeeValidate', '~/plugins/EventEmitter'],
 
   /*
   ** Nuxt.js modules
