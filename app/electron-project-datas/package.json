@@ -34,7 +34,11 @@
     "electron": "^4.0.2",
     "electron-builder": "^20.38.5",
     "jest": "^23.6.0",
+    "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0",
+    "sass-loader": "^7.1.0",
     "vue-jest": "^3.0.2"
   }
 }
