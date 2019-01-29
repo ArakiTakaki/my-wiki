@@ -1,5 +1,7 @@
 <template lang="pug">
-
+  div
+    .root
+      slot
 </template>
 
 <script>
