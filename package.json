@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "My splendiferous Nuxt.js project",
   "author": "ArakiTakaki",
+  "main": "main.js",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
+    "dev": "cross-env NODE_ENV=development electron ./main.js",
+    "build": "nuxt build && electron-builder",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "test": "jest"
+  },
+  "build":{
+    "appId": "my-project",
+    "directories": {
+      "output": "build"
+    }
   },
   "dependencies": {
     "cross-env": "^5.2.0",
