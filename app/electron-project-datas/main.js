@@ -33,6 +33,12 @@ if (config.dev) {
 let win = null // Current window
 const electron = require('electron')
 const app = electron.app
+
+electron.ipcMain.on('client_to_electron', (event, args) => {
+  console.log(args);
+  event.sender.send('electron_to_client', 'OK!')
+});
+
 const newWin = () => {
     win = new electron.BrowserWindow({})
     win.maximize()
