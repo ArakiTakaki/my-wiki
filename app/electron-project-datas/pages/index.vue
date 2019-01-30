@@ -75,4 +75,5 @@ export default class Index extends Vue {
 .side-bar {
   width: 150px;
 }
+
 </style>

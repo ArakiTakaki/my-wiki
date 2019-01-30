@@ -20,7 +20,7 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
+	font-size: 1rem;
 	font: inherit;
 	vertical-align: baseline;
 	font-family: Arial, Helvetica, sans-serif;
@@ -48,9 +48,24 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+input, button, textarea, select {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: 1rem;
+}
 
 * {
 	color: #eee;
+}
+html, body {
+  font-size: 20px;
 }
 
 </style>
