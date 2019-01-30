@@ -8,11 +8,17 @@
       h1 sample
       button(@click="onShowSidebar") open
       button(@click="onCloseSidebar") close
+      .electron
+        input(type="text" v-model="$data.message")
+        button(@click="onSendMessage") SEND
+        p {{ $data.reserveMessage }}
 </template>
 
 <script>
 import Vue from "vue";
 import { Component, Prop, Inject } from "vue-property-decorator";
+import { ipcRenderer } from "electron";
+
 // Components
 // import Input from '../components/Input.vue';
 import SideBar from "./components/SideBar";
@@ -24,13 +30,24 @@ import SideBar from "./components/SideBar";
 })
 export default class Index extends Vue {
   isShowSidebar = false;
+  message = "";
+  reserveMessage = "NONE";
 
   created() {
     this.$eventEmitter.on("sidebar", this.sidebarEmit);
+    ipcRenderer.on("electron_to_client",this.onSendElectron);
   }
+
   beforeDestroy() {
     this.$eventEmitter.on("sidebar", this.sidebarEmit);
+    ipcRenderer.removeListener("electron_to_client",this.onSendElectron);
   }
+
+  onSendElectron(event, args) {
+    console.log(args);
+    this.$data.reserveMessage = args;
+  }
+
   onShowSidebar() {
     this.$eventEmitter.emit("sidebar", { open: true });
   }
@@ -38,10 +55,12 @@ export default class Index extends Vue {
     this.$eventEmitter.emit("sidebar", { open: false });
   }
 
-  sidebarEmit (value) {
+  sidebarEmit(value) {
     this.$data.isShowSidebar = value.open;
   }
-
+  onSendMessage() {
+    ipcRenderer.send("client_to_electron", "FUGA!");
+  }
 }
 </script>
 
