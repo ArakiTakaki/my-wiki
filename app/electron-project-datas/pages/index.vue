@@ -1,13 +1,15 @@
 <template lang="pug">
   .root
-    .side-bar
-      .content(v-show="$data.isShowSidebar")
+    .side-bar.-close
+      .content
+        button(@click="onShowSidebar") open
+    .side-bar(v-if="$data.isShowSidebar")
+      .content
         SideBar
-        h1 test
+          h1 test
+          button(@click="onCloseSidebar") close
     .content
       h1 sample
-      button(@click="onShowSidebar") open
-      button(@click="onCloseSidebar") close
       .electron
         input(type="text" v-model="$data.message")
         button(@click="onSendMessage") SEND
@@ -35,12 +37,12 @@ export default class Index extends Vue {
 
   created() {
     this.$eventEmitter.on("sidebar", this.sidebarEmit);
-    ipcRenderer.on("electron_to_client",this.onSendElectron);
+    ipcRenderer.on("electron_to_client", this.onSendElectron);
   }
 
   beforeDestroy() {
     this.$eventEmitter.on("sidebar", this.sidebarEmit);
-    ipcRenderer.removeListener("electron_to_client",this.onSendElectron);
+    ipcRenderer.removeListener("electron_to_client", this.onSendElectron);
   }
 
   onSendElectron(event, args) {
@@ -59,7 +61,8 @@ export default class Index extends Vue {
     this.$data.isShowSidebar = value.open;
   }
   onSendMessage() {
-    ipcRenderer.send("client_to_electron", "FUGA!");
+    ipcRenderer.send("client_to_electron", this.$data.message);
+    this.$data.message = "";
   }
 }
 </script>
@@ -75,5 +78,7 @@ export default class Index extends Vue {
 .side-bar {
   width: 150px;
 }
-
+.side-bar.-close{
+  width: 50px;
+}
 </style>
