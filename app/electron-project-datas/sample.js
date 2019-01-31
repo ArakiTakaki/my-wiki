@@ -1,4 +1,3 @@
-
 const notifier = require('node-notifier');
 // String
 notifier.notify('Message');
@@ -8,4 +7,3 @@ notifier.notify({
   title: 'My notification',
   message: 'Hello, there!'
 });
-
