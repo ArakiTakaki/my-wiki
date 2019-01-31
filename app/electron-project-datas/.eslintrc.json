@@ -1,5 +1,6 @@
 {
   "globals": {
+    "process": true
   },
   "extends": [
     "vue",
@@ -105,7 +106,7 @@
         "allowSingleLine": true
       }],
     "quotes": [
-      2, "single", "avoid-escape"
+      1, "single", "avoid-escape"
     ],
     "camelcase": [2, {
       "properties": "never"

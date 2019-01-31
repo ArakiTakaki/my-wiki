@@ -1,19 +1,20 @@
-const pkg = require('./package')
-
+const pkg = require('./package');
 
 module.exports = {
   /**
    * spa | universal
-  */
+   */
   mode: 'spa',
 
   /**
    * ソースの存在しているディレクトリ
    */
   // srcDir: 'app',
-  css: [
-    'reset.css'
-  ],
+
+  /*
+   ** Global CSS
+   */
+  css: ['reset.css'],
   /**
    * Vue Routerの設定を上書きできる
    */
@@ -21,13 +22,13 @@ module.exports = {
     /**
      * https://ja.nuxtjs.org/api/configuration-router
      * mode : ルーティングのモードを設定します。サーバーサイドレンダリングのため、この設定を変更することは非推奨です。
-    */
+     */
     mode: 'hash'
   },
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     title: pkg.name,
     meta: [
@@ -35,55 +36,43 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: '#fff' },
 
   /*
-  ** Global CSS
-  */
-  css: [
-  ],
+   ** Plugins to load before mounting the App
+   */
+  plugins: ['~/plugins/VeeValidate', '~/plugins/EventEmitter'],
 
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [ '~/plugins/VeeValidate', '~/plugins/EventEmitter'],
+   ** Nuxt.js modules
+   */
+  modules: [],
 
   /*
-  ** Nuxt.js modules
-  */
-  modules: [
-  ],
-
-  /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend(config, ctx) {
-      babel: {
-        plugins: ['transform-decorators-legacy', 'transform-class-properties']
-      }
+      { ['transform-decorators-legacy', 'transform-class-properties']; }
       /**
        * webpackの出力先
        */
-      config.output.publicPath = './_nuxt/',
-      config.target = 'electron-renderer'
+      (config.output.publicPath = './_nuxt/'),
+        (config.target = 'electron-renderer');
     }
   },
   /**
    * https://ja.nuxtjs.org/api/configuration-dev
    * nuxt build、nuxt start、nuxt generate 以外の場合はTrueになる
    */
-  dev: process.env.NODE_ENV === 'development',
-
-}
+  dev: process.env.NODE_ENV === 'development'
+};
