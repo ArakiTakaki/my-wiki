@@ -31,11 +31,6 @@ let win = null; // Current window
 const electron = require('electron');
 const app = electron.app;
 
-electron.ipcMain.on('client_to_electron', (event, args) => {
-  console.log(args);
-  event.sender.send('electron_to_client', 'OK!');
-});
-
 const newWin = () => {
   win = new electron.BrowserWindow({});
   win.maximize();
@@ -58,7 +53,18 @@ const newWin = () => {
   } else {
     return win.loadURL(_NUXT_URL_);
   }
+  return null;
 };
+
+const notifier = require('node-notifier');
+electron.ipcMain.on('client_to_electron', (event, args) => {
+  console.log(args);
+  notifier.notify({
+    title: 'My notification',
+    message: args
+  });
+  event.sender.send('electron_to_client', args);
+});
 app.on('ready', newWin);
 app.on('window-all-closed', () => app.quit());
 app.on('activate', () => win === null && newWin());
