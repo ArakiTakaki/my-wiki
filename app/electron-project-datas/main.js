@@ -30,20 +30,21 @@ if (config.dev) {
 let win = null; // Current window
 const electron = require('electron');
 const app = electron.app;
+const storage = require('electron-json-storage');
+
+let cacheLog = [];
 
 const newWin = () => {
   win = new electron.BrowserWindow({});
   win.maximize();
   win.on('closed', () => (win = null));
   if (config.dev) {
-    // Wait for nuxt to build
     const pollServer = () => {
       http
         .get(_NUXT_URL_, res => {
           if (res.statusCode === 200) {
             win.loadURL(_NUXT_URL_);
           } else {
-            console.log('restart poolServer');
             setTimeout(pollServer, 300);
           }
         })
@@ -58,13 +59,30 @@ const newWin = () => {
 
 const notifier = require('node-notifier');
 electron.ipcMain.on('client_to_electron', (event, args) => {
-  console.log(args);
-  notifier.notify({
-    title: 'My notification',
-    message: args
-  });
+  // notifier.notify({
+  //   title: 'My notification',
+  //   message: args
+  // });
+  cacheLog.push(args);
   event.sender.send('electron_to_client', args);
 });
+
+electron.ipcMain.on('request_log_data', event => {
+  storage.get('log', (error, data) => {
+    console.log('データやで', data);
+    if (error) {
+			console.error(error); // eslint-disable-line
+    }
+    if (data.log != null) {
+      cacheLog = data.log;
+    }
+    event.sender.send('response_log_data', data.log);
+  });
+});
+
 app.on('ready', newWin);
-app.on('window-all-closed', () => app.quit());
+app.on('window-all-closed', () => {
+	storage.set('log', { log: cacheLog }, err => console.error(err)); // eslint-disable-line
+  app.quit();
+});
 app.on('activate', () => win === null && newWin());

@@ -14,6 +14,8 @@
         input(type="text" v-model="$data.message")
         button(@click="onSendMessage") SEND
         p {{ $data.reserveMessage }}
+        template(v-for="value in $data.log")
+          p {{value}}
 </template>
 
 <script>
@@ -34,10 +36,19 @@ class Index extends Vue {
   isShowSidebar = false;
   message = '';
   reserveMessage = 'NONE';
+  log = [];
 
   created() {
     this.$eventEmitter.on('sidebar', this.sidebarEmit);
     ipcRenderer.on('electron_to_client', this.onSendElectron);
+  }
+
+  mounted() {
+    ipcRenderer.send('request_log_data', null);
+    ipcRenderer.once('response_log_data', (event, args) => {
+      console.log('データもろたわ', args);
+      this.$data.log = args;
+    });
   }
 
   beforeDestroy() {
@@ -46,8 +57,8 @@ class Index extends Vue {
   }
 
   onSendElectron(event, args) {
-    console.log(args);
     this.$data.reserveMessage = args;
+    this.$data.log.push(args);
   }
 
   onShowSidebar() {
