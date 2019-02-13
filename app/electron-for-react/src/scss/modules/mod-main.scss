@@ -1,0 +1,37 @@
+.mod-main {
+  flex: 1 1 auto;
+  width: 100%;
+
+  @include tb {
+    display: flex;
+    margin: 0 auto;
+    padding: 30px 45px;
+  }
+
+  @include pc {
+    padding: 30px 0;
+    max-width: 895px;
+  }
+
+  &__content {
+    @include tb {
+      flex: 1 1 0;
+    }
+  }
+
+  &__side {
+    padding: 40px 30px 80px;
+    border-top: solid 10px #f5f5f5;
+
+    @include tb {
+      flex: 0 0 auto;
+      padding: 0;
+      margin-left: 45px;
+      border: 0;
+    }
+
+    @include pc {
+      margin-left: 80px;
+    }
+  }
+}

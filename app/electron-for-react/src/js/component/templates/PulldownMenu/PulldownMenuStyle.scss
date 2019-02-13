@@ -1,0 +1,33 @@
+// test
+
+.pulldown-title {
+  display: flex;
+
+  & > .-open {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px;
+    border-bottom: 2px;
+    transform: rotate(45deg);
+  }
+
+  & > .-close {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px;
+    border-bottom: 2px;
+    transform: rotate(45deg);
+  }
+}
+
+.pulldown-content {
+  display: flex;
+  max-height: 0;
+  transition: $basic-transition;
+
+  & .-open {
+    max-height: 100%;
+  }
+}

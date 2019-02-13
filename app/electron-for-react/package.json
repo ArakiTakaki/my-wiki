@@ -1,0 +1,135 @@
+{
+	"name": "electron-for-react",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "git@github.com:team-lab/pkg-booking-borderless.git",
+	"author": "ArakiTakaki <araki_takaki@yahoo.co.jp>",
+	"license": "MIT",
+	"private": true,
+	"scripts": {
+		"_スタート": "",
+		"start": "cross-env MODE=development webpack-dev-server --config ./webpack.develop.js",
+		"build:dev": "cross-env MODE=development  webpack --config ./webpack.develop.js --watch",
+		"build:stg": "cross-env MODE=development  webpack --config ./webpack.develop.js --watch",
+		"build:prod": "cross-env MODE=production webpack --config ./webpack.production.js",
+		"_テスト系コマンド": "",
+		"storybook": "start-storybook -p 6006",
+		"storybook:build": "build-storybook",
+		"test": "jest",
+		"test:update": "jest --updateSnapshot",
+		"lint:js": "eslint --fix \"**/*.{js,jsx}\"",
+		"lint:style": "stylelint --fix \"src/**/*.scss\" --syntax scss",
+		"_コンポーネント生成系": "",
+		"atom": "react-creator --component atoms --func",
+		"molecule": "react-creator --component molecules --func",
+		"organism": "react-creator --component organisms",
+		"template": "react-creator --component templates",
+		"page": "react-creator --component pages"
+	},
+	"engines": {
+		"yarn": "^1.10.1",
+		"node": ">=10.9.0"
+	},
+	"dependencies": {
+		"axios": "^0.18.0",
+		"classnames": "^2.2.6",
+		"css-hot-loader": "^1.4.3",
+		"electron": "^4.0.4",
+		"electron-builder": "^20.38.5",
+		"electron-json-storage": "^4.1.6",
+		"lodash": "^4.17.11",
+		"mobx": "^5.9.0",
+		"mobx-devtools": "^0.9.20",
+		"mobx-react": "^5.4.3",
+		"mobx-react-devtools": "^6.0.3",
+		"moment": "^2.24.0",
+		"react": "^16.8.1",
+		"react-css-modules": "^4.7.9",
+		"react-dom": "^16.8.1",
+		"react-router": "^4.3.1",
+		"react-router-dom": "^4.3.1",
+		"reset-css": "^4.0.1"
+	},
+	"devDependencies": {
+		"@babel/core": "7.2.2",
+		"@babel/plugin-proposal-class-properties": "^7.3.0",
+		"@babel/plugin-proposal-decorators": "7.3.0",
+		"@babel/plugin-transform-runtime": "7.2.0",
+		"@babel/polyfill": "^7.2.5",
+		"@babel/preset-react": "7.0.0",
+		"@storybook/addon-actions": "^4.1.11",
+		"@storybook/addon-info": "4.1.11",
+		"@storybook/addon-knobs": "4.1.11",
+		"@storybook/addon-links": "^4.1.11",
+		"@storybook/addon-viewport": "4.1.11",
+		"@storybook/cli": "4.1.11",
+		"@storybook/react": "^4.1.11",
+		"autoprefixer": "9.4.7",
+		"babel-eslint": "^10.0.1",
+		"babel-loader": "8.0.5",
+		"babel-plugin-lodash": "^3.3.4",
+		"concurrently": "4.1.0",
+		"cross-env": "5.2.0",
+		"css-loader": "2.1.0",
+		"editorconfig": "0.15.2",
+		"enzyme": "^3.8.0",
+		"enzyme-adapter-react-16": "^1.9.1",
+		"eslint": "5.13.0",
+		"eslint-config-prettier": "4.0.0",
+		"eslint-loader": "2.1.2",
+		"eslint-plugin-prettier": "3.0.1",
+		"eslint-plugin-react": "7.12.4",
+		"html-webpack-plugin": "3.2.0",
+		"husky": "1.3.1",
+		"identity-obj-proxy": "^3.0.0",
+		"jest": "^24.1.0",
+		"lint-staged": "8.1.3",
+		"node-sass": "^4.11.0",
+		"postcss-flexbox": "1.0.3",
+		"postcss-loader": "3.0.0",
+		"prettier": "1.16.4",
+		"prettier-eslint": "^8.8.2",
+		"prettier-eslint-cli": "^4.7.1",
+		"pug": "2.0.3",
+		"pug-loader": "2.4.0",
+		"react-creator": "ArakiTakaki/react-creator.git",
+		"react-hot-loader": "4.6.5",
+		"react-test-renderer": "^16.8.1",
+		"sass-loader": "7.1.0",
+		"sass-resources-loader": "^2.0.0",
+		"storybook": "1.0.0",
+		"style-loader": "0.23.1",
+		"stylelint": "^9.10.1",
+		"stylelint-config-rational-order": "^0.0.4",
+		"stylelint-config-scss": "^1.0.0-security",
+		"stylelint-scss": "^3.5.3",
+		"webpack": "4.29.3",
+		"webpack-bundle-analyzer": "^3.0.3",
+		"webpack-cli": "3.2.3",
+		"webpack-dev-server": "3.1.14"
+	},
+	"resolutions": {
+		"ajv": "6.8.1"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run fix & lint-staged",
+			"pre-push": "npm test"
+		}
+	},
+	"lint-staged": {
+		"*.{js,jsx,scss}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.scss": [
+      "stylelint --fix",
+      "git add"
+    ]
+	},
+	"jest": {
+		"moduleNameMapper": {
+			"\\.(css|sass|scss)$": "identity-obj-proxy"
+		}
+	}
+}

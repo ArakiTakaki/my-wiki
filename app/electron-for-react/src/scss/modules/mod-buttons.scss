@@ -1,0 +1,11 @@
+.mod-buttons {
+  &__button {
+    & + & {
+      margin-top: 20px;
+
+      @include tb {
+        margin-top: 10px;
+      }
+    }
+  }
+}
