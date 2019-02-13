@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
-import { DatePicker } from '../component/molecules';
 import moment from 'moment';
 
 @inject('store')
@@ -24,10 +23,6 @@ class Index extends React.Component {
     return (
       <div>
         <p> {this.props.store.param} </p>
-        <DatePicker
-          currentDate={this.state.currentDate}
-          planDateList={this.state.isogasiihi}
-        />
       </div>
     );
   }

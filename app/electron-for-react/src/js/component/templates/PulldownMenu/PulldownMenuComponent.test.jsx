@@ -10,7 +10,7 @@ import renderer from 'react-test-renderer';
 // snapshot test
 test('PulldownMenu SnapShot', () => {
   let component = null;
-  component = renderer.create(<PulldownMenu />).toJSON();
+  component = renderer.create(<PulldownMenu value="test" />).toJSON();
   expect(component).toMatchSnapshot();
 });
 
