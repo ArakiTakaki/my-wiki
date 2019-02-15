@@ -2,23 +2,16 @@ const webpack = require('webpack');
 const resolves = require('./config/resolves');
 const loaders = require('./config/loaders');
 const plugins = require('./config/plugins');
-const vendors = require('./config/vendor');
-const splitChunks = require('./config/splitChunks');
-// const BundleAnalyzer = require('webpack-bundle-analyzer');
 
 const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    app: ['./src/js/entry.jsx'],
-    vendor: vendors
+    app: ['./src/js/entry.jsx']
   },
   target: 'electron-renderer',
   module: {
     rules: loaders
-  },
-  optimization: {
-    splitChunks
   },
   devtool: 'inline-source-map',
   resolve: resolves,
