@@ -6,32 +6,38 @@ const isSourceMaps = {
 console.log(process.env.MODE);
 const isProduction = isSourceMaps[process.env.MODE] || false;
 const isSourceMap = isSourceMaps[process.env.MODE] || false;
-const styleLocalIdentName = isProduction ? '[name]-[local]-[hash:base64:4]' : '[name]-[local]-[hash:base64:4]'
+const styleLocalIdentName = isProduction
+  ? '[name]-[local]-[hash:base64:4]'
+  : '[name]-[local]-[hash:base64:4]';
 
-module.exports = [{
+module.exports = [
+  {
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,
-    use: ["babel-loader"]
+    use: ['babel-loader']
   },
   {
-    enforce: "pre",
+    enforce: 'pre',
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,
-    loader: "eslint-loader"
+    loader: 'eslint-loader'
   },
   {
     test: /\.pug$/,
-    use: [{
-      loader: "pug-loader"
-    }]
+    use: [
+      {
+        loader: 'pug-loader'
+      }
+    ]
   },
   {
     test: /\.(sass|scss)$/,
-    use: [{
-        loader: "style-loader"
+    use: [
+      {
+        loader: 'style-loader'
       },
       {
-        loader: "css-loader",
+        loader: 'css-loader',
         options: {
           sourceMap: isSourceMap,
           localIdentName: styleLocalIdentName,
@@ -39,14 +45,14 @@ module.exports = [{
         }
       },
       {
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           sourceMap: isSourceMap,
-          plugins: [require("autoprefixer")({grid: true})]
+          plugins: [require('autoprefixer')({ grid: true })]
         }
       },
       {
-        loader: "sass-loader",
+        loader: 'sass-loader',
         options: {
           sourceMap: isSourceMap
         }

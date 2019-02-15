@@ -22,6 +22,7 @@ class Index extends React.Component {
   render() {
     return (
       <div>
+        test
         <p> {this.props.store.param} </p>
       </div>
     );

@@ -51,5 +51,29 @@
     "sass": "^1.16.1",
     "sass-loader": "^7.1.0",
     "vue-jest": "^3.0.2"
+  },
+  "resolutions": {
+    "ajv": "6.8.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.scss": [
+      "stylelint --fix",
+      "git add"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|sass|scss)$": "identity-obj-proxy"
+    }
   }
 }
