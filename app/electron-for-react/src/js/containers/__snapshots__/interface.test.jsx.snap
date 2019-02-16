@@ -3,9 +3,18 @@
 exports[`interface Snapshot 1`] = `
 <div>
   <div>
+    test aiueo kakikukeko
+    <button
+      onClick={[Function]}
+    >
+      test
+    </button>
+    <p>
+      1
+    </p>
     <p>
        
-      
+      ストアに繋がってるよ
        
     </p>
   </div>

@@ -1,20 +1,26 @@
-const WEBPACK_URL = 'http://localhost:3030';
-let win = null; // Current window
-// const http = require('http');
-const electron = require('electron');
 const app = electron.app;
+const WEBPACK_URL = 'http://localhost:3030';
+const electron = require('electron');
 const storage = require('electron-json-storage');
+// Events
+{
+  require('./events/events');
+}
 
-let cacheLog = [];
-
+let win = null;
 const newWin = () => {
   win = new electron.BrowserWindow({});
   win.maximize();
   win.loadURL(WEBPACK_URL);
   win.on('closed', () => (win = null));
-  // return null;
 };
 
+app.on('ready', newWin);
+app.on('window-all-closed', () => {
+  storage.set('log', { log: cacheLog }, err => console.error(err)); // eslint-disable-line
+  app.quit();
+});
+// エントリーポイント
 // const notifier = require('node-notifier');
 // electron.ipcMain.on('client_to_electron', (event, args) => {
 //   // notifier.notify({
@@ -38,9 +44,4 @@ const newWin = () => {
 //   });
 // });
 
-app.on('ready', newWin);
-app.on('window-all-closed', () => {
-  storage.set('log', { log: cacheLog }, err => console.error(err)); // eslint-disable-line
-  app.quit();
-});
 // app.on('activate', () => win === null && newWin());

@@ -1,0 +1,8 @@
+module.exports = {
+  IPC: {
+    MESSAGE: {
+      CLIENT_TO_SERVER: 'MESSAGE_CLIENT_TO_SERVER',
+      SERVER_TO_CLIENT: 'MESSAGE_SERVER_TO_CLIENT'
+    }
+  }
+};

@@ -8,7 +8,7 @@
 	"private": true,
 	"scripts": {
 		"_スタート": "",
-		"electron": "electron ./main.js",
+		"electron": "electron ./src/electron/main.js",
 		"start": "cross-env MODE=development webpack-dev-server --config ./webpack.develop.js",
 		"build:dev": "cross-env MODE=development  webpack --config ./webpack.develop.js --watch",
 		"build:stg": "cross-env MODE=development  webpack --config ./webpack.develop.js --watch",

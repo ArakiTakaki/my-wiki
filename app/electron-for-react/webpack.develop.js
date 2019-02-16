@@ -9,7 +9,7 @@ module.exports = {
   entry: {
     app: ['./src/js/entry.jsx']
   },
-  // target: 'electron-renderer',
+  target: 'electron-renderer',
   module: {
     rules: loaders
   },
