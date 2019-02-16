@@ -1,4 +1,4 @@
-const exec = require('child_process').exec;
+// const exec = require('child_process').exec;
 class MyWebpackPlugin {
   // コンパイラを引数として受ける apply メソッド
   apply(compiler) {
@@ -22,13 +22,19 @@ class MyWebpackPlugin {
 
     compiler.plugin('after-emit', (compilation, callback) => {
       console.log('最終出力');
-      // callbackをやらないと実行が止まるっぽい
-      exec('open http://localhost:3030');
       callback();
     });
 
-    compiler.plugin('done', (stats) => {
+    // 完了した際の出力
+    compiler.plugin('done', stats => {
       console.log('DONE!');
+    });
+
+    compiler.plugin('watch-run', (watching, callback) => {
+      console.log('==============================');
+      console.log('テスト');
+      console.log('==============================');
+      callback();
     });
   }
 }

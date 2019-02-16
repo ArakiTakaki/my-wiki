@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import moment from 'moment';
 
-@inject('store')
+@inject('storage')
 @observer
 class Index extends React.Component {
   constructor(props) {
@@ -15,15 +15,17 @@ class Index extends React.Component {
     };
   }
   onChange(e) {
-    const { store } = this.props;
-    store.setParam(e.currentTarget.value);
+    const { storage } = this.props;
+    storage.setCount(10);
   }
 
   render() {
     return (
       <div>
-        test
-        <p> {this.props.store.param} </p>
+        test aiueo kakikukeko
+        <button onClick={this.onChange}>test</button>
+        <p>{this.props.storage.value.count}</p>
+        <p> {this.props.storage.param} </p>
       </div>
     );
   }
@@ -31,7 +33,7 @@ class Index extends React.Component {
 
 Index.propTypes = {
   children: PropTypes.any,
-  store: PropTypes.any
+  storage: PropTypes.any
 };
 
 export default Index;

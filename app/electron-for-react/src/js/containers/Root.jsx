@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Index from '../pages';
-import Store from '../store';
+import storage from '../store/storage';
 import { Provider } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
-const store = {
-  store: new Store()
+import { hot } from 'react-hot-loader';
+
+const stores = {
+  storage
 };
+@hot(module)
 class Root extends React.Component {
   render() {
     return (
       <div>
-        <Provider {...store}>
+        <Provider {...stores}>
           <Index />
         </Provider>
         {process.env.NODE_ENV === 'development' ? <DevTools /> : null}
