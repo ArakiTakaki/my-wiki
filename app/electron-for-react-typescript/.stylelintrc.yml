@@ -1,0 +1,15 @@
+extends:
+  - stylelint-config-rational-order
+plugins:
+  - stylelint-scss
+rules:
+  declaration-block-no-redundant-longhand-properties: # 省略可能な記法を使用する
+    - true
+  font-family-name-quotes: always-where-recommended # Font名のクォーテーションを省略する
+  font-weight-notation: numeric                     # フォント名を文字列で指定する
+  function-url-quotes: never                        # url()などの引数ではクォーテーションを省略する
+  indentation: null                                 # インデントの警告を無視
+  max-line-length: null                             # １行の文字数を制限しない
+  number-leading-zero: always                       # 小数の最初の0を省略させない
+  rscss/class-format: null                          # ネストでの挙動が不安定なので無効化
+  selector-list-comma-newline-after: null           # 複数セレクタのカンマの後にスペースを入
