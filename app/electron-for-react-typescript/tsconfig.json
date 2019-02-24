@@ -1,11 +1,15 @@
 {
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
   "compilerOptions": {
-    "outFile": "./dist",
-    /* Concatenate and emit output to single file. */
-    "rootDir": "./src/main.ts",
-    /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    "outDir": "./budle",
+    "rootDir": "./src",
     "target": "es6",
-    "allowJs": true,
     "baseUrl": ".",
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -13,7 +17,7 @@
     "lib": [
       "dom",
       "es2015",
-      "es2017"
+      "es2017",
     ],
     "module": "es2015",
     "moduleResolution": "node",
@@ -30,12 +34,13 @@
     /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
     // "lib": [],                             /* Specify library files to be included in the compilation. */
-    // "allowJs": true,                       /* Allow javascript files to be compiled. */
-    // "checkJs": true,                       /* Report errors in .js files. */
+    "allowJs": true,
+    /* Allow javascript files to be compiled. */
+    "checkJs": true,
+    /* Report errors in .js files. */
     // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */
-    // "outDir": "./",                        /* Redirect output structure to the directory. */
     // "composite": true,                     /* Enable project compilation */
     // "removeComments": true,                /* Do not emit comments to output. */
     // "noEmit": true,                        /* Do not emit outputs. */

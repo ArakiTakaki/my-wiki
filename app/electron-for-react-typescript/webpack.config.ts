@@ -1,7 +1,15 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+// import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+interface MyConfig extends webpack.Configuration {
+  module: {
+    rules: webpack.Rule[];
+  };
+  devServer: any;
+}
 
 export const tsRule: webpack.Rule = {
   test: /\.(ts|tsx)/,
@@ -36,7 +44,11 @@ export const cssRule: webpack.Rule = {
 
 export const htmlRule: webpack.Rule = {
   test: /\.pug/,
-  use: ['html-loader', 'pug-loader']
+  use: [
+    {
+      loader: 'pug-loader'
+    }
+  ]
 };
 
 export const ruleList: webpack.Rule[] = [tsRule, cssRule, htmlRule];
@@ -48,9 +60,7 @@ export const resolves: webpack.Resolve = {
 export const plugins: webpack.Plugin[] = [
   new ForkTsCheckerWebpackPlugin(),
   new HtmlWebpackPlugin({
-    cache: true,
-    template: path.resolve('./src/html/index.pug'),
-    inject: 'head'
+    template: path.resolve('./src/html/index.pug')
   }),
   new webpack.HotModuleReplacementPlugin()
 ];
@@ -63,7 +73,7 @@ export const output: webpack.Output = {
 
 // const isProduction = process.env.NODE_ENV === 'production';
 
-export const baseConfig: webpack.Configuration = {
+export const baseConfig: MyConfig = {
   mode: 'development',
   entry: [path.resolve('./src/react/entry.tsx')],
   output: output,
@@ -71,7 +81,11 @@ export const baseConfig: webpack.Configuration = {
   module: {
     rules: ruleList
   },
-  plugins: plugins
+  resolve: resolves,
+  plugins: plugins,
+  devServer: {
+    inline: true
+  }
 };
 
 export default baseConfig;
