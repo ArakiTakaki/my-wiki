@@ -24,16 +24,19 @@ export const cssRule: webpack.Rule = {
     {
       loader: 'css-loader',
       options: {
-        module: true,
+        // modules: true,
         sourceMap: true
       }
     },
     {
-      loader: 'postcss-loader',
-      options: {
-        sourceMap: isSourceMap
-      }
+      loader: 'css-typescript-loader'
     },
+    // {
+    //   loader: 'postcss-loader',
+    //   options: {
+    //     sourceMap: isSourceMap
+    //   }
+    // },
     {
       loader: 'sass-loader',
       options: {
@@ -80,6 +83,9 @@ export const baseConfig: webpack.Configuration = {
   output: output,
   // target: 'electron',
   devtool: 'inline-source-map',
+  resolveLoader: {
+    modules: ['node_modules', 'loaders']
+  },
   module: {
     rules: ruleList
   },
