@@ -1,7 +1,6 @@
 import React from 'react';
 import * as mobx from 'mobx-react';
-
-const styles = require('./Layout.sass');
+import * as styles from './Layout.sass';
 
 interface Props {
   children?: React.ComponentElement<any, any>;

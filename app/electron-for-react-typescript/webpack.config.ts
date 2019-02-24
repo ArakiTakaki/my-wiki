@@ -1,3 +1,4 @@
+process.env.UV_THREADPOOL_SIZE = '5';
 import webpack from 'webpack';
 import path from 'path';
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');

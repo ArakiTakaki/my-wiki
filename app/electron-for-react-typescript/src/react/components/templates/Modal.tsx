@@ -1,5 +1,4 @@
 import React from 'react';
-const a = require('./Modal.sass');
 
 interface Props {
   children?: any;
