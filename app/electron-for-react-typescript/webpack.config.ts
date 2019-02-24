@@ -3,13 +3,12 @@ import path from 'path';
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const isSourceMap: Boolean = true;
 export const tsRule: webpack.Rule = {
   test: /\.(ts|tsx)/,
-  use: {
-    loader: 'ts-loader',
-    options: {
-      transpileOnly: true
-    }
+  loader: 'ts-loader',
+  options: {
+    transpileOnly: true
   }
 };
 
@@ -17,19 +16,29 @@ export const cssRule: webpack.Rule = {
   test: /\.sass/,
   use: [
     {
-      loader: 'style-loader'
+      loader: 'style-loader',
+      options: {
+        sourceMap: isSourceMap
+      }
     },
     {
       loader: 'css-loader',
       options: {
-        module: true
+        module: true,
+        sourceMap: true
       }
     },
     {
-      loader: 'postcss-loader'
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: isSourceMap
+      }
     },
     {
-      loader: 'sass-loader'
+      loader: 'sass-loader',
+      options: {
+        sourceMap: isSourceMap
+      }
     }
   ]
 };
@@ -50,7 +59,7 @@ export const resolves: webpack.Resolve = {
 };
 
 export const plugins: webpack.Plugin[] = [
-  new ForkTsCheckerWebpackPlugin(),
+  new ForkTsCheckerWebpackPlugin({ reportFiles: ['src/**/*.{ts,tsx}'] }),
   new HtmlWebpackPlugin({
     template: path.resolve('./src/html/index.pug')
   }),
@@ -70,6 +79,7 @@ export const baseConfig: webpack.Configuration = {
   entry: [path.resolve('./src/react/entry.tsx')],
   output: output,
   // target: 'electron',
+  devtool: 'inline-source-map',
   module: {
     rules: ruleList
   },
