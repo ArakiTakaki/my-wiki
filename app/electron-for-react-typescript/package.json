@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack-dev-server",
-    "build": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' webpack"
+    "start": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack-dev-server -t webpack.config.ts",
+    "build": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
@@ -14,9 +14,11 @@
     "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
     "@types/html-webpack-plugin": "^3.2.0",
     "@types/jest": "^24.0.6",
+    "@types/node": "^11.9.5",
     "@types/react": "^16.8.4",
     "@types/react-dom": "^16.8.2",
     "@types/webpack": "^4.4.24",
+    "@types/webpack-dev-server": "^3.1.2",
     "autoprefixer": "^9.4.8",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
@@ -29,7 +31,6 @@
     "husky": "^1.3.1",
     "jest": "^24.1.0",
     "lint-staged": "^8.1.4",
-    "node-ts": "^3.0.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.16.4",
     "pug": "^2.0.3",
@@ -40,6 +41,8 @@
     "stylelint-config-rational-order": "^0.0.4",
     "stylelint-scss": "^3.5.4",
     "ts-loader": "^5.3.3",
+    "ts-node": "^8.0.2",
+    "tsconfig-paths": "^3.8.0",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",

@@ -1,15 +1,7 @@
-import * as webpack from 'webpack';
-import * as path from 'path';
-// import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
+import path from 'path';
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-interface MyConfig extends webpack.Configuration {
-  module: {
-    rules: webpack.Rule[];
-  };
-  devServer: any;
-}
 
 export const tsRule: webpack.Rule = {
   test: /\.(ts|tsx)/,
@@ -73,7 +65,7 @@ export const output: webpack.Output = {
 
 // const isProduction = process.env.NODE_ENV === 'production';
 
-export const baseConfig: MyConfig = {
+export const baseConfig: webpack.Configuration = {
   mode: 'development',
   entry: [path.resolve('./src/react/entry.tsx')],
   output: output,
@@ -84,7 +76,17 @@ export const baseConfig: MyConfig = {
   resolve: resolves,
   plugins: plugins,
   devServer: {
-    inline: true
+    contentBase: '/dist',
+    port: 3030,
+    // 他デバイスで見たい時用
+    host: '0.0.0.0',
+    hot: true,
+    overlay: true,
+    filename: 'bundle.js',
+    publicPath: '/',
+    stats: {
+      colors: true
+    }
   }
 };
 
