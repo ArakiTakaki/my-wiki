@@ -34,7 +34,7 @@ class Index extends React.Component<Props, State> {
     return (
       <Layout>
         <div>
-          <p>test</p>
+          <p>testAiasdfdsaueo</p>
           <h1>{this.props.storage.count}</h1>
           <button onClick={this.onIncrementEvent}>+</button>
           <button onClick={this.onDecrementEvent}>-</button>

@@ -1,16 +1,23 @@
-process.env.UV_THREADPOOL_SIZE = '5';
+process.env.UV_THREADPOOL_SIZE = '10';
 import webpack from 'webpack';
 import path from 'path';
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const AutodllWebpackPlugin = require('autodll-webpack-plugin');
 
 const isSourceMap: Boolean = true;
 export const tsRule: webpack.Rule = {
   test: /\.(ts|tsx)/,
-  loader: 'ts-loader',
-  options: {
-    transpileOnly: true
-  }
+  include: path.resolve('src'),
+  use: [
+    {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true
+      }
+    }
+  ]
 };
 
 export const cssRule: webpack.Rule = {
@@ -65,22 +72,35 @@ export const resolves: webpack.Resolve = {
 export const plugins: webpack.Plugin[] = [
   new ForkTsCheckerWebpackPlugin({ reportFiles: ['src/**/*.{ts,tsx}'] }),
   new HtmlWebpackPlugin({
-    template: path.resolve('./src/html/index.pug')
+    inject: true,
+    template: path.resolve('./src/html/index.pug'),
+    minify: {
+      collapseWhitespace: true
+    }
   }),
-  new webpack.HotModuleReplacementPlugin()
+  new webpack.HotModuleReplacementPlugin(),
+  new AutodllWebpackPlugin({
+    inject: true,
+    filename: '[name]_[hash].js',
+    entry: {
+      react: ['react', 'react-dom'],
+      mobx: ['mobx', 'mobx-react'],
+      util: ['fecha', 'axios']
+    }
+  }),
+  new BundleAnalyzerPlugin()
 ];
 
 export const output: webpack.Output = {
-  path: path.resolve('./dist/js'),
-  filename: 'bundle.js',
-  publicPath: '/'
+  path: path.resolve('dist'),
+  filename: '[name].js'
 };
-
-// const isProduction = process.env.NODE_ENV === 'production';
 
 export const baseConfig: webpack.Configuration = {
   mode: 'development',
-  entry: [path.resolve('./src/react/entry.tsx')],
+  entry: {
+    'dll-user': [path.resolve('src/react/entry.tsx')]
+  },
   output: output,
   // target: 'electron',
   devtool: 'inline-source-map',
