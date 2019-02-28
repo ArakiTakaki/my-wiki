@@ -33,6 +33,12 @@ const cssClassExtraction = (source) => {
 
 module.exports = function (source, map) {
   this.cacheable();
+  const sourcePath = resolve(map.sourceRoot, map.sources[0] + '.d.ts');
+
+  // node_modulesのsourcepathは必要ない
+  if ( /node_modules/.test(sourcePath) ) {
+    this.callback(null, source, map);
+  }
 
   const options = loaderUtils.getOptions(this);
 
@@ -68,7 +74,6 @@ module.exports = function (source, map) {
   /**
    * ファイルへの書き込みをおこなう。
    */
-  const sourcePath = resolve(map.sourceRoot, map.sources[0] + '.d.ts');
   fs.writeFile(sourcePath, outputDTS, error => {
     if (error != null) {
       console.error(error);
