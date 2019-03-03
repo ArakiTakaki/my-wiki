@@ -1,9 +1,12 @@
+import * as React from 'react';
+import { ModalType } from './ModalStore';
 import { observable, action } from 'mobx';
 
 export type ModalType = {
   show: boolean;
-  message: string;
+  content: string;
   title: string;
+  footer: string;
   onShowEvent(): void;
   onCloseEvent(): void;
 };
@@ -13,10 +16,13 @@ class ModalStore {
   public show = true;
 
   @observable
-  public message = 'test';
+  public content = 'test';
 
   @observable
   public title = 'title';
+
+  @observable
+  public footer = 'footer';
 
   @action.bound
   public onShowEvent() {

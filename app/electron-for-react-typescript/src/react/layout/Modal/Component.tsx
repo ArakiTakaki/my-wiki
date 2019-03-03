@@ -21,8 +21,20 @@ class Modal extends React.Component<Props, State> {
     return (
       <div className={Style.root}>
         <div className={Style.content}>
-          <h1>{modal.title}</h1>
-          <p>{modal.message}</p>
+          <header>{modal.title}</header>
+          <section>
+            <p>よろです</p>
+            <p>{modal.content}</p>
+            <p>{modal.content}</p>
+            <p>{modal.content}</p>
+            <p>{modal.content}</p>
+            <p>てすと</p>
+          </section>
+          <footer className={Style.footerContent}>
+            <button className={Style.left}>Prev</button>
+
+            <button className={Style.right}>Next</button>
+          </footer>
         </div>
       </div>
     );
