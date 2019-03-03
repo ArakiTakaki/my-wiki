@@ -8,7 +8,6 @@ rulesDirectory:
 linterOptions:
   excrude: node_modules/**
 rules:
-  jsx-no-lanbda: false
   prettier: # Prettierの設定
     - true
     -
