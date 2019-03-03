@@ -21,7 +21,7 @@ export const tsRule: webpack.Rule = {
 };
 
 export const cssRule: webpack.Rule = {
-  test: /\.sass/,
+  test: /\.(sass|scss)/,
   use: [
     {
       loader: 'style-loader',
@@ -32,8 +32,8 @@ export const cssRule: webpack.Rule = {
     {
       loader: 'css-loader',
       options: {
-        // modules: true,
-        sourceMap: true
+        modules: true,
+        sourceMap: isSourceMap
       }
     },
     {

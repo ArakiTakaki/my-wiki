@@ -1,7 +1,7 @@
 import React from 'react';
-import * as mobx from 'mobx-react';
 import { StorageType } from '../store/Storage';
-import Layout from '../components/templates/Layout';
+import Modal from '../layout/Modal/Component';
+import { inject, observer } from 'mobx-react';
 
 interface Props {
   children?: any;
@@ -9,8 +9,8 @@ interface Props {
 }
 interface State {}
 
-@mobx.inject('storage')
-@mobx.observer
+@inject('storage')
+@observer
 class Index extends React.Component<Props, State> {
   constructor(props) {
     super(props);
@@ -32,14 +32,15 @@ class Index extends React.Component<Props, State> {
     if (this.props.storage == null) return null;
 
     return (
-      <Layout>
+      <div>
         <div>
           <p>testAiasdfdsaueo</p>
           <h1>{this.props.storage.count}</h1>
           <button onClick={this.onIncrementEvent}>+</button>
           <button onClick={this.onDecrementEvent}>-</button>
         </div>
-      </Layout>
+        <Modal />
+      </div>
     );
   }
 }

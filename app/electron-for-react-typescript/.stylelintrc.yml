@@ -11,5 +11,4 @@ rules:
   indentation: null                                 # インデントの警告を無視
   max-line-length: null                             # １行の文字数を制限しない
   number-leading-zero: always                       # 小数の最初の0を省略させない
-  rscss/class-format: null                          # ネストでの挙動が不安定なので無効化
   selector-list-comma-newline-after: null           # 複数セレクタのカンマの後にスペースを入

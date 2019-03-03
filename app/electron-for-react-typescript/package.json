@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "_ START系": "_",
-    "start": "concurrently \"yarn start:electron\" \"yarn start:client\"",
+    "start": "concurrently --kill-others \"yarn start:electron\" \"yarn start:client\"",
     "start:electron": "electron ./dist/electron/electron/main.js",
     "start:client": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack-dev-server -t webpack.config.ts",
     "_ BUILD系": "_",
@@ -67,6 +67,7 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.3.3333",
     "webpack": "^4.29.5",
     "webpack-bundle-analyzer": "^3.0.4",
@@ -81,7 +82,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix",
+      "tslint --fix",
       "git add"
     ],
     "*.{css,scss,sass}": [

@@ -22,6 +22,9 @@ const unique = (itemList) => {
 const cssClassExtraction = (source) => {
   // . から始まり、 { か 空白 の間を抽出する。
   let classNameList = source.match(/\.+([a-z]|[A-Z]|\-|\_){1,}/g);
+  if (classNameList == null) {
+    return [];
+  }
 
   // Classに使える様に整形
   let itemList = classNameList.map(className => {
@@ -37,7 +40,8 @@ module.exports = function (source, map) {
   const options = loaderUtils.getOptions(this);
 
   // node_modulesのsourcepathは必要ない
-  if ( /node_modules/.test(sourcePath) ) {
+  console.log(sourcePath);
+  if ( /node_modules/.test(map.sourceRoot) ) {
     this.callback(null, source, map);
   }
 
@@ -55,11 +59,16 @@ module.exports = function (source, map) {
   let outputDTS = '';
 
   /**
-   * sources からクラスネームを算出する。
+   * sources から pクラスネームを算出する。
    */
   map.sourcesContent.forEach(source => {
     classNameList = [...cssClassExtraction(source), ...classNameList];
   });
+  // クラスネームがない場合は必要ない。
+  if (classNameList.length === 0){
+    this.callback(null, source, map);
+    return;
+  }
 
   /**
    *

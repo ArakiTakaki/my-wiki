@@ -1,5 +1,6 @@
 extends:
   - tslint-config-prettier
+  - tslint-react
 
 rulesDirectory:
   - tslint-plugin-prettier
@@ -7,6 +8,7 @@ rulesDirectory:
 linterOptions:
   excrude: node_modules/**
 rules:
+  jsx-no-lanbda: false
   prettier: # Prettierの設定
     - true
     -
@@ -16,7 +18,7 @@ rules:
       semi: true # セミコロンを付与する
       singleQuote: true # シングルクォーテーションに揃える
       trailingComma: none # ケツカンマをなくす
-  class-name: true # クラス名をパスカルケースに強制
+  # class-name: true # クラス名をパスカルケースに強制
   member-access: true # public,protected,privateの付与を強制
   newline-before-return: true # returnの前に改行を強制
   no-boolean-literal-compare: false # Prettierがやってくれるので無効化
@@ -31,6 +33,6 @@ rules:
   switch-final-break: # switch文の最後にbreakを強制
     - true
     - always
-  typedef: # 型の定義を強制する
-    - true
-    - call-signature # 関数の戻り値
+  # typedef: # 型の定義を強制する
+  #   - true
+  #   - call-signature # 関数の戻り値
