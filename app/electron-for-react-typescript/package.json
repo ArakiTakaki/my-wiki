@@ -6,9 +6,10 @@
   "scripts": {
     "_ START系": "_",
     "start": "concurrently \"yarn start:electron\" \"yarn start:client\"",
-    "start:electron": "electron ./src/electron/main.js",
+    "start:electron": "electron ./dist/electron/electron/main.js",
     "start:client": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack-dev-server -t webpack.config.ts",
     "_ BUILD系": "_",
+    "build:electron": "tsc ./src/electron/main.ts --outDir ./dist/electron",
     "build": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
   },
   "dependencies": {
