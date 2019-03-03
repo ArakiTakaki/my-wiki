@@ -41,7 +41,6 @@ module.exports = function (source, map) {
     this.callback(null, source, map);
   }
 
-
   /**
    * sourceの中身が無い場合はスキップする
    */
