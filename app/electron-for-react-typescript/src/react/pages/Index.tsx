@@ -7,7 +7,9 @@ interface Props {
   children?: any;
   storage?: StorageType;
 }
-interface State {}
+interface State {
+  isModalOpen: boolean;
+}
 
 @inject('storage')
 @observer
@@ -16,6 +18,19 @@ class Index extends React.Component<Props, State> {
     super(props);
     this.onIncrementEvent = this.onIncrementEvent.bind(this);
     this.onDecrementEvent = this.onDecrementEvent.bind(this);
+
+    this.modalCloseEvent = this.modalCloseEvent.bind(this);
+    this.modalOpenEvent = this.modalOpenEvent.bind(this);
+    this.state = {
+      isModalOpen: true
+    };
+  }
+
+  public modalCloseEvent() {
+    this.setState({ isModalOpen: false });
+  }
+  public modalOpenEvent() {
+    this.setState({ isModalOpen: true });
   }
 
   public onIncrementEvent() {
@@ -39,7 +54,16 @@ class Index extends React.Component<Props, State> {
           <button onClick={this.onIncrementEvent}>+</button>
           <button onClick={this.onDecrementEvent}>-</button>
         </div>
-        <Modal />
+        <div>
+          <button onClick={this.modalOpenEvent}>onOpenModal</button>
+        </div>
+        <Modal
+          isOpen={this.state.isModalOpen}
+          title="sample"
+          content="sample"
+          footerType="double"
+          onClickPrimary={this.modalCloseEvent}
+        />
       </div>
     );
   }

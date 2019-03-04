@@ -1,39 +1,64 @@
 import React, { ReactComponentElement } from 'react';
 import Style from './Style.sass';
-import { inject, observer } from 'mobx-react';
-import { ModalType } from '@/react/store/ModalStore';
+import ButtonTypes, { IButton } from './ButtonComponent';
 
 interface Props {
-  children?: any;
-  modal?: ModalType;
+  title: string | React.ReactNode;
+  content: string | React.ReactNode;
+  footerType: 'single' | 'double' | 'none' | 'text';
+  isOpen: boolean;
+  primaryText: string;
+  secondaryText?: string;
+  onClickPrimary?(event: React.MouseEventHandler | void): void;
+  onClickSecondary?(event: React.MouseEventHandler | void): void;
 }
 interface State {}
-
-@inject('modal')
-@observer
 class Modal extends React.Component<Props, State> {
+  public static defaultProps: Props = {
+    isOpen: false,
+    footerType: 'single',
+    title: <div>Sample</div>,
+    content: <div>sample content</div>,
+    primaryText: 'OK',
+    secondaryText: 'NG'
+  };
+
+  constructor(props: Props) {
+    super(props);
+  }
+
   public render() {
-    const { modal } = this.props;
-    if (modal == null || !modal.show) {
+    if (!this.props.isOpen) {
       return <div />;
     }
 
     return (
       <div className={Style.root}>
         <div className={Style.content}>
-          <header>{modal.title}</header>
+          <header>
+            {typeof this.props.title === 'string' ? (
+              <h1>{this.props.title}</h1>
+            ) : (
+              <>{this.props.title}</>
+            )}
+          </header>
           <section>
-            <p>よろです</p>
-            <p>{modal.content}</p>
-            <p>{modal.content}</p>
-            <p>{modal.content}</p>
-            <p>{modal.content}</p>
-            <p>てすと</p>
+            {typeof this.props.content === 'string' ? (
+              <p>{this.props.content}</p>
+            ) : (
+              <>{this.props.content}</>
+            )}
           </section>
           <footer className={Style.footerContent}>
-            <button className={Style.left}>Prev</button>
-
-            <button className={Style.right}>Next</button>
+            {this.props.footerType !== 'none' ? (
+              <ButtonTypes
+                isSingle={this.props.footerType === 'single'}
+                primaryText={this.props.primaryText}
+                secondaryText={this.props.secondaryText}
+                onClickPrimary={this.props.onClickPrimary}
+                onClickSecondary={this.props.onClickSecondary}
+              />
+            ) : null}
           </footer>
         </div>
       </div>

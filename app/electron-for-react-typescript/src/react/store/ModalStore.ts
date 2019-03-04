@@ -7,6 +7,11 @@ export type ModalType = {
   content: string;
   title: string;
   footer: string;
+  isSingle: boolean;
+
+  singleMode(): void;
+  addEventLeft(): void;
+  addEventRight(): void;
   onShowEvent(): void;
   onCloseEvent(): void;
 };
@@ -14,6 +19,9 @@ export type ModalType = {
 class ModalStore {
   @observable
   public show = true;
+
+  @observable
+  public isSingle = false;
 
   @observable
   public content = 'test';

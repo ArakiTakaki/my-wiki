@@ -85,7 +85,7 @@ export const plugins: webpack.Plugin[] = [
     entry: {
       react: ['react', 'react-dom'],
       mobx: ['mobx', 'mobx-react'],
-      util: ['fecha', 'axios']
+      util: ['fecha', 'axios', 'url']
     }
   }),
   new BundleAnalyzerPlugin()

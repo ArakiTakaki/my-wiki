@@ -22,6 +22,7 @@ rules:
   newline-before-return: true # returnの前に改行を強制
   no-boolean-literal-compare: false # Prettierがやってくれるので無効化
   no-console: false # デバッグするときにうるさいから許可
+  jsx-no-multiline-js: false # 服す業のJSX式を許可する
   # no-inferrable-types: true # 型推論可能な場合は型を書かない
   no-string-throw: true # 文字列のthrowを禁止
   no-unused-expression: false # 文の位置の表現の使用を許可する

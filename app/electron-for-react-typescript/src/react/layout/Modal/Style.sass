@@ -22,17 +22,23 @@
   overflow: scroll
   background-color: #fff
   border-radius: 8px
+  box-shadow: 0px 4px 16px 1px rgba(#000, 0.2)
   transform: translate(-50%,-50%)
 
   & > header
     padding: 16px
-    font-size: 1.9rem
-    text-indent: 0.5em
-    border-bottom: 1px solid 555
+
+    & > h1
+      font-weight: 600
+      font-size: 1.9rem
+      text-indent: 0.5em
 
   & > section
-    max-height: 80vh
+    min-height: 20vh
+    max-height: 50vh
+    padding: 16px 8px
     overflow: scroll
+
     & > p
       margin-top: 10px
       font-size: 1.2rem
@@ -46,15 +52,18 @@
   border-top: 1px solid 555
 
   & > .left
-    width: 50%
+    width: 100%
     padding: 8px 16px
+    color: #FFFFFF
     font-weight: 800
     font-size: 1.2rem
-    background-color: #D9E5FF
+    background-color: #E26964
+
 
   & > .right
-    width: 50%
+    width: 100%
     padding: 8px 16px
+    color: #FFFFFF
     font-weight: 800
     font-size: 1.2rem
-    background-color: #D9E5FF
+    background-color: #4E9C95

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "_ START系": "_",
-    "start": "concurrently --kill-others \"yarn start:electron\" \"yarn start:client\"",
+    "start": "concurrently --kill-others \"yarn start:client\" \"yarn start:electron\" ",
     "start:electron": "electron ./dist/electron/electron/main.js",
     "start:client": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack-dev-server -t webpack.config.ts",
     "_ BUILD系": "_",
