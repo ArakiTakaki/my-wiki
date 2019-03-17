@@ -1,4 +1,3 @@
-process.env.UV_THREADPOOL_SIZE = '10';
 import webpack from 'webpack';
 import path from 'path';
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -6,10 +5,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const AutodllWebpackPlugin = require('autodll-webpack-plugin');
 
-const isSourceMap: Boolean = true;
+// const isSourceMap: Boolean = true;
 export const tsRule: webpack.Rule = {
   test: /\.(ts|tsx)/,
   include: path.resolve('src'),
+  exclude: /node_modules/,
   use: [
     {
       loader: 'ts-loader',
@@ -24,21 +24,17 @@ export const cssRule: webpack.Rule = {
   test: /\.(sass|scss)/,
   use: [
     {
-      loader: 'style-loader',
-      options: {
-        sourceMap: isSourceMap
-      }
+      loader: 'style-loader'
     },
     {
       loader: 'css-loader',
       options: {
-        modules: true,
-        sourceMap: isSourceMap
+        modules: true
       }
     },
-    {
-      loader: 'css-typescript-loader'
-    },
+    // {
+    //   loader: 'css-typescript-loader'
+    // },
     // {
     //   loader: 'postcss-loader',
     //   options: {
@@ -46,16 +42,15 @@ export const cssRule: webpack.Rule = {
     //   }
     // },
     {
-      loader: 'sass-loader',
-      options: {
-        sourceMap: isSourceMap
-      }
+      loader: 'sass-loader'
     }
   ]
 };
 
 export const htmlRule: webpack.Rule = {
   test: /\.pug/,
+  include: path.resolve('src'),
+  exclude: /node_modules/,
   use: [
     {
       loader: 'pug-loader'
@@ -85,7 +80,7 @@ export const plugins: webpack.Plugin[] = [
     entry: {
       react: ['react', 'react-dom'],
       mobx: ['mobx', 'mobx-react'],
-      util: ['fecha', 'axios']
+      util: ['fecha', 'axios', 'url']
     }
   }),
   new BundleAnalyzerPlugin()
@@ -97,12 +92,13 @@ export const output: webpack.Output = {
 };
 
 export const baseConfig: webpack.Configuration = {
-  mode: 'development',
+  // mode: 'development',
+  mode: 'production',
   entry: {
     'dll-user': [path.resolve('src/react/entry.tsx')]
   },
   output: output,
-  // target: 'electron',
+  target: 'electron-renderer',
   devtool: 'inline-source-map',
   resolveLoader: {
     modules: ['node_modules', 'loaders']

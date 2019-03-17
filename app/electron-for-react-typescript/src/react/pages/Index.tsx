@@ -2,32 +2,37 @@ import React from 'react';
 import { StorageType } from '../store/Storage';
 import Modal from '../layout/Modal/Component';
 import { inject, observer } from 'mobx-react';
+import SideBar from '../layout/SideBar/Component';
+import { hot } from 'react-hot-loader';
 
 interface Props {
   children?: any;
   storage?: StorageType;
 }
-interface State {}
+interface State {
+  isModalOpen: boolean;
+}
 
 @inject('storage')
 @observer
+@hot(module)
 class Index extends React.Component<Props, State> {
   constructor(props) {
     super(props);
-    this.onIncrementEvent = this.onIncrementEvent.bind(this);
-    this.onDecrementEvent = this.onDecrementEvent.bind(this);
+    this.modalCloseEvent = this.modalCloseEvent.bind(this);
+    this.modalOpenEvent = this.modalOpenEvent.bind(this);
+    this.state = {
+      isModalOpen: false
+    };
   }
 
-  public onIncrementEvent() {
-    const { storage } = this.props;
-    if (storage == null) return;
-    storage.incrementAmount();
+  public modalCloseEvent() {
+    this.setState({ isModalOpen: false });
   }
-  public onDecrementEvent() {
-    const { storage } = this.props;
-    if (storage == null) return;
-    storage.decrementAmount();
+  public modalOpenEvent() {
+    this.setState({ isModalOpen: true });
   }
+
   public render() {
     if (this.props.storage == null) return null;
 
@@ -35,11 +40,20 @@ class Index extends React.Component<Props, State> {
       <div>
         <div>
           <p>testAiasdfdsaueo</p>
-          <h1>{this.props.storage.count}</h1>
-          <button onClick={this.onIncrementEvent}>+</button>
-          <button onClick={this.onDecrementEvent}>-</button>
+          <p>testAiasdfdsaueo</p>
+          <p>testAiasdfdsaueo</p>
         </div>
-        <Modal />
+        <div>
+          <button onClick={this.modalOpenEvent}>onOpenModal</button>
+        </div>
+        <Modal
+          isOpen={this.state.isModalOpen}
+          title="sample"
+          content="sample"
+          footerType="double"
+          onClickPrimary={this.modalCloseEvent}
+        />
+        <SideBar />
       </div>
     );
   }
