@@ -1,23 +1,32 @@
-import * as Mobx from 'mobx';
+import { observable, action } from 'mobx';
 
 export type StorageType = {
-  count: number;
-  incrementAmount(): void;
-  decrementAmount(): void;
+  githubToken: string;
+  asanaToken: string;
 };
 
 class Storage {
-  @Mobx.observable
-  public count: number = 0;
+  @observable public githubToken: string = '';
+  @observable public asanaToken: string = '';
 
-  @Mobx.action.bound
-  public incrementAmount() {
-    this.count += 1;
+  @action.bound
+  public setAsanaToken(token) {
+    this.asanaToken = token;
   }
 
-  @Mobx.action.bound
-  public decrementAmount() {
-    this.count -= 1;
+  @action.bound
+  public getAsanaToken() {
+    return this.asanaToken;
+  }
+
+  @action.bound
+  public setGithubToken(token) {
+    this.githubToken = token;
+  }
+
+  @action.bound
+  public getGithubToken() {
+    return this.githubToken;
   }
 }
 

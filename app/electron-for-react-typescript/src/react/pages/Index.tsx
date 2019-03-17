@@ -2,6 +2,8 @@ import React from 'react';
 import { StorageType } from '../store/Storage';
 import Modal from '../layout/Modal/Component';
 import { inject, observer } from 'mobx-react';
+import SideBar from '../layout/SideBar/Component';
+import { hot } from 'react-hot-loader';
 
 interface Props {
   children?: any;
@@ -13,16 +15,14 @@ interface State {
 
 @inject('storage')
 @observer
+@hot(module)
 class Index extends React.Component<Props, State> {
   constructor(props) {
     super(props);
-    this.onIncrementEvent = this.onIncrementEvent.bind(this);
-    this.onDecrementEvent = this.onDecrementEvent.bind(this);
-
     this.modalCloseEvent = this.modalCloseEvent.bind(this);
     this.modalOpenEvent = this.modalOpenEvent.bind(this);
     this.state = {
-      isModalOpen: true
+      isModalOpen: false
     };
   }
 
@@ -33,16 +33,6 @@ class Index extends React.Component<Props, State> {
     this.setState({ isModalOpen: true });
   }
 
-  public onIncrementEvent() {
-    const { storage } = this.props;
-    if (storage == null) return;
-    storage.incrementAmount();
-  }
-  public onDecrementEvent() {
-    const { storage } = this.props;
-    if (storage == null) return;
-    storage.decrementAmount();
-  }
   public render() {
     if (this.props.storage == null) return null;
 
@@ -50,9 +40,8 @@ class Index extends React.Component<Props, State> {
       <div>
         <div>
           <p>testAiasdfdsaueo</p>
-          <h1>{this.props.storage.count}</h1>
-          <button onClick={this.onIncrementEvent}>+</button>
-          <button onClick={this.onDecrementEvent}>-</button>
+          <p>testAiasdfdsaueo</p>
+          <p>testAiasdfdsaueo</p>
         </div>
         <div>
           <button onClick={this.modalOpenEvent}>onOpenModal</button>
@@ -64,6 +53,7 @@ class Index extends React.Component<Props, State> {
           footerType="double"
           onClickPrimary={this.modalCloseEvent}
         />
+        <SideBar />
       </div>
     );
   }

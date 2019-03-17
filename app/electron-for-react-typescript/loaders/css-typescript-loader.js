@@ -36,6 +36,7 @@ const cssClassExtraction = (source) => {
 
 module.exports = function (source, map) {
   this.cacheable();
+  console.log('sourceRoot', map.sourceRoot);
   const sourcePath = resolve(map.sourceRoot, map.sources[0] + '.d.ts');
   const options = loaderUtils.getOptions(this);
 
